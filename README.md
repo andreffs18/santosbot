@@ -1,6 +1,6 @@
 # Santosbot
 
-SlackBot that spits out quotes from Gustavo Santos whenever a **trigger word** is written.
+SlackBot that spits out quotes from Gustavo Santos whenever a **Trigger Word** is written.
 
 ![](https://i.imgur.com/nM3mJd3.jpg)
 
@@ -22,6 +22,7 @@ This project runs entirely on the [SlackClient](https://github.com/slackapi/pyth
 ### Create Bot
 First of all you need to create a new Bot. For the sake of the joke, we will call it **santosbot**. You just need to go to "https://api.slack.com/bot-users" under "Custom bot users", and submit your bot name.
 
+![](https://i.imgur.com/TSYs9Tc.png)
 
 Once you have your new bot created, you need to save the **API Token** that is under **Integration Settings** section.
 > You can customize your bot with a picture, first name and last name. For this project, we will be calling it **Gugu Santos**
@@ -45,7 +46,7 @@ Whever a **Trigger Word** is typed, he will select a random quote and post it as
 > You can find all Trigger Words on [/utils/quotes.py:123](https://github.com/andreffs18/santosbot/blob/master/utils/quotes.py#L188)
 
 
-
+![](https://i.imgur.com/56XcpeI.png)
 
 
 
