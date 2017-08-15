@@ -1,8 +1,8 @@
 # Santosbot
 
-SlackBot that spits out quotes from Gustavo Santos whenever a **trigger word** is written
+SlackBot that spits out quotes from Gustavo Santos whenever a **trigger word** is written.
 
-![](http://imgur.com/nM3mJd3)
+![](https://i.imgur.com/nM3mJd3.jpg)
 
 
 ## Install 
