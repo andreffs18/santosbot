@@ -2,7 +2,7 @@
 
 SlackBot that spits out quotes from Gustavo Santos whenever a **trigger word** is written
 
-![](http://www.movenoticias.com/wp-content/uploads/2016/06/gustavo-santos.jpg)
+![](http://imgur.com/nM3mJd3)
 
 
 ## Install 
@@ -15,24 +15,20 @@ $ mkvirtualenv santosbot
 [santosbot] $ pip install -r requirements.txt
 ```
 
-## Setup Server
+## Setup Bot
 
 This project runs entirely on the [SlackClient](https://github.com/slackapi/python-slackclient) for python by taking advantage of the [**RTM Api**](https://api.slack.com/rtm).
 
-First of all you need to create a new Bot. For the sake of the joke, we will call it **santosbot**
-
-You just need to go to "https://api.slack.com/bot-users" under "Custom bot users", and submit your bot name.
-
-
-
+### Create Bot
+First of all you need to create a new Bot. For the sake of the joke, we will call it **santosbot**. You just need to go to "https://api.slack.com/bot-users" under "Custom bot users", and submit your bot name.
 
 
 Once you have your new bot created, you need to save the **API Token** that is under **Integration Settings** section.
 > You can customize your bot with a picture, first name and last name. For this project, we will be calling it **Gugu Santos**
 
+### Running "SantosBot" Server
 
 Now, that we already have our API token, we just need to run the project like so:
-
 ```shell
 $ SLACK_BOT_TOKEN=xoxb-***** python run_bot.py
 Got BOT_ID=<@U6BR114N7> for "santosbot"
@@ -42,6 +38,7 @@ Got BOT_ID=<@U6BR114N7> for "santosbot"
 (...)
 ```
 
+### Make it talk!
 To see it working, you just need to invite him to a slack channel and start talking. 
 Whever a **Trigger Word** is typed, he will select a random quote and post it as a reply to whatever you were saying.
 
