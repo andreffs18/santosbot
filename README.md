@@ -1,4 +1,4 @@
-# Santosbot
+# Gustavo Santos Guru Bot
 
 SlackBot that spits out quotes from Gustavo Santos whenever a **Trigger Word** is written.
 
