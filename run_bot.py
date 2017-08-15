@@ -1,27 +1,31 @@
 # -*- coding: utf-8 -*-
+
+# Configs
 import os
 import re
 import time
 import random
 import string
-from datetime import datetime, timedelta
 
+from datetime import datetime, timedelta
 from slackclient import SlackClient
 
-from quotes import QUOTES, TRIGGER_WORDS
+from utils.quotes import QUOTES, TRIGGER_WORDS
 
+# Slack Bot Token: "https://api.slack.com/bot-users" under "Custom bot users"
 SLACK_BOT_TOKEN = os.environ.get("SLACK_BOT_TOKEN")
 BOT_NAME = os.environ.get("BOT_NAME", 'santosbot')
 BOT_ID = os.environ.get("BOT_ID")
+
 # 1 second delay between reading from firehose
 READ_WEBSOCKET_DELAY = 1
 # timeout before re-using the same quote
 QUOTE_REUSE_TIMEOUT = 15 # seconds
-# MAKE GLOBAL VAR TO PREVENT DOUBLE POSTING
+# global variable to prevent double posting 
 LAST_POST_AT = datetime.min
-
-
+# python slack client 
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
+
 
 def get_bot_id():
 	"""From env BOT_NAME, call Slack Api and search for BOT_NAME's slack id"""
@@ -36,7 +40,8 @@ def get_bot_id():
 
 
 def tokenize_string(text):
-	""""""
+	"""Given a string "text" tokenize it and make it lower case so it's 
+	easier to search for trigger words"""
 	new_tokens = list()
 	regex = re.compile('[%s]' % re.escape(string.punctuation))
 	text = regex.sub('', text)
@@ -47,17 +52,17 @@ def tokenize_string(text):
 def parse_slack_output(slack_rtm_output):
 	"""The Slack Real Time Messaging API is an events firehose. 
 	This parsing function returns None unless a message is directed
-	at the Bot, based on its ID.
-	"""
+	at the Bot, based on its ID."""
 	output_list = slack_rtm_output
 	if output_list and len(output_list) > 0:
+		
 		print(datetime.now(), output_list)
+		
 		for output in output_list:
 			if output.get('type') != 'message':
 				continue
 
-			print(datetime.now(), output_list)
-			
+			print(datetime.now(), output_list)	
 			tokenized_text = tokenize_string(output.get('text', ""))
 			intersection = set(TRIGGER_WORDS).intersection(tokenized_text)
 			
@@ -72,9 +77,7 @@ def parse_slack_output(slack_rtm_output):
 
 				trigger_word = TRIGGER_WORDS.get(word)
 				trigger_word.update({'last_used_at': datetime.now()})
-
 				LAST_POST_AT = datetime.now() 
-
 				print(u"> FOUND QUOTE: {} = {}: {}".format(word, quote_id, quote))
 				slack_client.api_call("chat.postMessage", channel=output['channel'], text=quote, as_user=True)
 
@@ -83,6 +86,7 @@ if __name__ == "__main__":
 	# Get bot name UID
 	AT_BOT = get_bot_id()
 	print("Got BOT_ID={} for \"{}\"".format(AT_BOT, BOT_NAME))
+	
 	# Start connection
 	if slack_client.rtm_connect():
 		print("\"{}\" connected and running!".format(BOT_NAME))
