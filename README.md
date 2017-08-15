@@ -12,7 +12,7 @@ To install this you need:
 ```shell
 $ git clone
 $ mkvirtualenv santosbot
-[santosbot] $ pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 
 ## Setup Bot
