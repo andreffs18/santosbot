@@ -20,7 +20,7 @@ $ pip install -r requirements.txt
 This project runs entirely on the [SlackClient](https://github.com/slackapi/python-slackclient) for python by using the [**RTM Api**](https://api.slack.com/rtm).
 
 ### Create Bot
-First of all you need to create a new Bot. For the sake of the joke, we will call it **santosbot**. You just need to go to "https://api.slack.com/bot-users" under "Custom bot users", and submit your bot name.
+First of all you need to create a new Bot. For the sake of the joke, we will call it **"santosbot"**. You just need to go to "https://api.slack.com/bot-users" under "Custom bot users", and submit your bot name.
 
 ![](https://i.imgur.com/TSYs9Tc.png)
 
