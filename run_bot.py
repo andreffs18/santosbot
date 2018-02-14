@@ -14,7 +14,7 @@ from utils.quotes import QUOTES, TRIGGER_WORDS
 
 # Slack Bot Token: "https://api.slack.com/bot-users" under "Custom bot users"
 SLACK_BOT_TOKEN = os.environ.get("SLACK_BOT_TOKEN")
-BOT_NAME = os.environ.get("BOT_NAME", 'santosbot')
+BOT_NAME = os.environ.get("BOT_NAME", 'gustavosantos')
 BOT_ID = os.environ.get("BOT_ID")
 
 # 1 second delay between reading from firehose
