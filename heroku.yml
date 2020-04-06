@@ -1,8 +1,19 @@
-setup:
- addons:
-
 build:
  docker:
-   api: ./api/Dockerfile
-   frontend: ./frontend/Dockerfile
-   bot: ./bot/Dockerfile
+   web: ./frontend/Dockerfile
+ config:
+   VUE_APP_API_URL: http://24954873.ngrok.io
+   # frontend: ./frontend/Dockerfile
+   # bot: ./bot/Dockerfile
+# used to define Heroku addons and configuration variables to create during app provisioning.
+
+# used to define which commands to run for the web and worker processes.
+run:
+  web: npm run start
+  #web: uvicorn api:app --port $PORT --host 0.0.0.0
+
+# used to define tasks that you'd like to execute during a release.
+release:
+  image: web
+  command:
+    - ls -lha && env

@@ -31,7 +31,7 @@ Note that this project has a Dockerfile, which you can run aswell
 ```shell script
 # Build and run project, on port 8080
 ~/santosbot/frontend $ docker build -t frontend:latest .
-~/santosbot/frontend $ docker run --rm -it -v $(PWD):/app -v /app/node_modules --env-file .env -p 8080:8080 frontend:latest 
+~/santosbot/frontend $ docker run --rm -it -v $(PWD):/app -v /app/node_modules -p 8080:80 frontend:latest 
 
 
 ```

@@ -1,12 +1,13 @@
 FROM python:3.7
 
-ARG ENVIRONMENT=development
-
-ENV \
-  ENVIRONMENT=${ENVIRONMENT} \
+# set environment variables
+ENV PORT=$PORT \
+  ENVIRONMENT=$ENVIRONMENT \
   PROJECT_DIR=/app \
   POETRY_VERSION=1.0.5 \
-  # Dump Python tracebacks explicitly 
+  # Prevent Python from writing *pyc files to disk
+  PYTHONDONTWRITEBYTECODE=1 \
+  # Dump Python tracebacks explicitly
   PYTHONFAULTHANDLER=1 \
   # Force STDOU & STDERR to be unbuffered
   PYTHONUNBUFFERED=1 \
@@ -30,5 +31,5 @@ RUN poetry config virtualenvs.create false && \
 # Creating folders, and files for a project:
 COPY api ./api
 
-EXPOSE 8888
-CMD uvicorn api:app --port 8888 --host 0.0.0.0
+EXPOSE $PORT
+CMD uvicorn api:app --port $PORT --host 0.0.0.0

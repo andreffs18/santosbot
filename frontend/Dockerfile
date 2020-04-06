@@ -8,18 +8,16 @@ COPY package*.json ./
 RUN npm install
 # copy project files and folders to the current working directory (i.e. 'app' folder)
 COPY . .
+
+# Setup environments
+ARG VUE_APP_API_URL
+ENV VUE_APP_API_URL $VUE_APP_API_URL
 # build app for production with minification
-# RUN npm run build
+RUN npm run build
 
 # install simple http server for serving static content
 # RUN npm install -g http-server
 # make the 'app' folder the current working directory
-EXPOSE 8080
-CMD ["npm", "run", "serve"]
+# EXPOSE 8080
+# CMD ["npm", "run", "serve"]
 # CMD [ "http-server", "dist" ]
-
-# production stage
-#FROM nginx:stable-alpine as production-stage
-#COPY --from=build-stage /app/dist /usr/share/nginx/html
-#EXPOSE 8080
-#CMD ["nginx", "-g", "daemon off;"]

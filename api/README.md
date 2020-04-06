@@ -10,8 +10,8 @@ Install docker and run the following:
 
 ```shell script
 # Build and run project, on port 8888
-~/santosbot/frontend $ docker build -t api:latest .
-~/santosbot/frontend $ docker run --rm -it -v $(PWD):/app --env-file .env -p 8888:8888 api:latest 
+~/santosbot/frontend $ docker build -e PORT=8888 -e ENVIRONMENT=development -t api:latest .
+~/santosbot/frontend $ docker run --rm -it -v $(PWD):/app -p 8888:8888 api:latest 
 ```
 
 ## Usage

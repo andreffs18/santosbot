@@ -11,15 +11,15 @@ services:
       - "8888:8888"
     volumes:
       - ./api/:/app
-    env_file:
-      - api/.env
+    environment:
+      ENVIRONMENT: development
+      PORT: 8888
       
   frontend:
     build:
       context: frontend/.
     depends_on: 
       - api
-    command: npm run serve
     volumes:
       - ./frontend:/app
       - /app/node_modules
