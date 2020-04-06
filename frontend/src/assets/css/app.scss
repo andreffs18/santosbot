@@ -1,0 +1,25 @@
+
+#app {
+    /* grid dispaly */
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: 100%;
+    grid-template-areas: "hello-card slack";
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 2px;
+    width: 90vw;
+    height: 90vh;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0 auto;
+    padding: 0px 10px 0px;
+    box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 1100px) {
+    #app { 
+        display: block;
+    }
+}

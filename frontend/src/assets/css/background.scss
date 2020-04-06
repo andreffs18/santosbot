@@ -1,0 +1,49 @@
+// Snippet from https://codepen.io/brownerd/pres/Ejpeyo
+$blue: #8AD4DD;
+$orange: #EFB458;
+$green: #5CC4A4;
+$cream: #FEF7E9;
+$pink: #E74E7E;
+$purple: #646490;
+$yellow: #FAEF64;
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 40px auto 0px;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    // height: 100vh;
+    width: 100vw;
+    background: repeating-linear-gradient(
+        -45deg, 
+        transparent, 
+        transparent 12.5%,
+        $green 12.5%, 
+        $green 25%, 
+        transparent 25%, 
+        transparent 37.5%, 
+        $orange 37.5%, 
+        $orange 50%
+    ), 
+    repeating-linear-gradient(
+        45deg, 
+        transparent, 
+        transparent 12.5%, 
+        $blue 12.5%, 
+        $blue 25%, 
+        transparent 25%, 
+        transparent 37.5%,
+        $pink 37.5%,
+        $pink 50%
+    ), $cream;
+    background-size: 40rem 40rem;
+    background-blend-mode: multiply;
+    position: relative;
+}

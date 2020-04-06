@@ -1,0 +1,6 @@
+*.pyc
+.env
+.git
+.gitignore
+.dockerignore
+Procfile

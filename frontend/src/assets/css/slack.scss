@@ -1,0 +1,270 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic,900,900italic);
+$SlackTeal: #4C9689;
+$SlackPurple: #4E394C;
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+#slack-container {
+    grid-area: slack;
+    font-family: 'Lato', Helvetica, sans-serif;
+    box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.2);
+    // height: 600px;
+    width: 100%;
+    margin: 40px auto;
+    margin-right: 0px;
+    border-radius: 5px;
+    overflow: hidden;
+    min-height: calc(100vh - 140px);
+    
+    #sidebar {
+        float: left;
+        color: #fff;
+        display: inline-block;
+        height: 100%;
+        float: left;
+        width: 30%;
+        background: $SlackPurple;
+
+        #team-picker {
+            margin-right: 15px;
+            float: left;
+            display: inline-block;
+            height: 100%;
+            width: 80px;
+            background: darken($SlackPurple, 5%);
+
+            .teams {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                padding-top: 25px;
+
+                .team {
+                    list-style: none;
+                    width: 45px;
+                    height: 45px;
+                    background: #fff;
+                    margin: 0 auto;
+                    margin-bottom: 25px;
+                    border-radius: 5px;
+                    overflow: hidden;
+                    background-image: url(http://socialmediaweek.org/wp-content/blogs.dir/1/files/slack-pattern-940x492.jpg);
+                    background-position: 7% 86%;
+                }
+            }
+        }
+
+        #team-name {
+            display: inline-block;
+
+            h1 {
+
+                font-size: 16px;
+                margin: 0;
+                margin-top: 10px;
+
+            }
+        }
+
+        #username {
+            display: block;
+
+            .status {
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                border-radius: 10px;
+                background-color: $SlackTeal;
+            }
+
+            h2 {
+                display: inline-block;
+                opacity: 0.5;
+                font-size: 14px;
+                font-weight: 300;
+                margin: 0;
+            }
+        }
+
+        #channels {
+            display: block;
+            padding-top: 25px;
+
+            h4 {
+                margin: 0;
+                margin-bottom: 10px;
+                padding: 0;
+                text-transform: uppercase;
+                font-weight: 400;
+                font-size: 12px;
+                opacity: 0.5;
+            }
+
+            .channel {
+                padding-left: 10px;
+                display: block;
+                font-weight: 300;
+
+                p {
+
+                    font-size: 13px;
+                    margin: 0;
+                    padding-top: 2.5px;
+                    padding-bottom: 2.5px;
+                    opacity: 0.5;
+
+                    i {
+                        font-style: normal;
+                        opacity: 0.45;
+                    }
+                }
+            }
+
+            .channel.unread {
+                font-weight: 700;
+
+                p {
+                    opacity: 1;
+
+                    i {
+                        font-weight: 300;
+                    }
+                }
+            }
+
+            .channel.selected {
+                width: 92%;
+                border-radius: 3px;
+                background: $SlackTeal;
+                padding-bottom: 3px;
+
+                p {
+                    opacity: 1;
+                }
+            }
+        }
+
+        #direct-messages {
+            display: block;
+            padding-top: 40px;
+
+            h4 {
+                margin: 0;
+                margin-bottom: 10px;
+                padding: 0;
+                text-transform: uppercase;
+                font-weight: 400;
+                font-size: 12px;
+                opacity: 0.5;
+            }
+
+            .direct-message {
+                padding-left: 10px;
+                display: block;
+                font-weight: 300;
+
+                .status {
+                    display: inline-block;
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 10px;
+                    background-color: $SlackTeal;
+                }
+
+                .status.inactive {
+                    background: transparent;
+                    width: 6px;
+                    height: 6px;
+                    border: 1px solid #fff;
+                    opacity: 0.5;
+                }
+
+                p {
+                    display: inline-block;
+                    font-size: 13px;
+                    margin: 0;
+                    padding-top: 2.5px;
+                    padding-bottom: 2.5px;
+                    padding-left: 3.5px;
+                    opacity: 0.5;
+                }
+            }
+        }
+    }
+
+    #chat {
+        position: relative;
+        width: 70%;
+        height: 100%;
+        display: inline-block;
+        background-color: #fff;
+
+        .header-bar {
+            width: 100%;
+            height: 50px;
+            padding-left: 10px;
+            border-bottom: 1px solid #ddd;
+
+            h1 {
+                font-size: 16px;
+                margin-bottom: 0;
+            }
+
+            h3 {
+                font-weight: 400;
+                display: inline-block;
+                font-size: 12px;
+                opacity: 0.3;
+                padding-right: 7px;
+                margin-top: 0;
+            }
+
+            .purpose {
+                border-left: 1px solid #ccc;
+                padding-left: 7px;
+            }
+        }
+
+        #chatbox {
+            width: 100%;
+            height: calc(100% - 122px);
+            overflow-y: scroll;
+            .messages {
+                width: 100%;
+            }
+        }
+
+        .input-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 62px;
+            padding: 3%;
+            background-color: #fff;
+
+            form {
+                input {
+                    outline: none;
+                    border-radius: 5px;
+                    border: 2px solid #dedede;
+                    height: 25px;
+                    width: 92%;
+                    padding: 5px;
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1100px) {
+   #slack-container  { 
+    height: 600px;
+  }
+}

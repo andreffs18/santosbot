@@ -1,0 +1,8 @@
+setup:
+ addons:
+
+build:
+ docker:
+   api: ./api/Dockerfile
+   frontend: ./frontend/Dockerfile
+   bot: ./bot/Dockerfile

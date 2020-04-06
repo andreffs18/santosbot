@@ -1,16 +1,40 @@
 ---
 version: "3"
+
 services:
   
-  bot:
-    image: santos:build
+  api:
     build:
-      context: .
-    volumes:
-      - .:/srv/bot
+      context: api/.
+    command: uvicorn api:app --port 8888 --host 0.0.0.0 --reload
     ports:
-      - "1234:8000"
+      - "8888:8888"
+    volumes:
+      - ./api/:/app
     env_file:
-      - .env
+      - api/.env
       
-    
+  frontend:
+    build:
+      context: frontend/.
+    depends_on: 
+      - api
+    command: npm run serve
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "8080:8080"
+    env_file: 
+      - frontend/.env
+
+  bot:
+    build:
+      context: bot/.
+    restart: always
+    depends_on: 
+      - api
+    volumes:
+      - ./bot:/app
+    env_file:
+      - bot/.env

@@ -1,0 +1,63 @@
+/* Links */
+
+a:link {
+    color: #8f8f8f;
+}
+
+a:visited {
+    color: #8f8f8f;
+}
+
+a:hover {
+    color: #8f8f8f;
+}
+
+a:active {
+    color: #8f8f8f;
+}
+
+/* Top page */
+#profileContainer {
+    // min-height: calc(100vh - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#profile {
+    max-width: 600px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    margin: 0 10px;
+}
+
+/* Header */
+header h1 {
+    text-align: center;
+}
+
+header .avatar {
+    position: relative;
+    height: 100px;
+}
+
+header .avatar img {
+    position: absolute;
+    width: 100px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+
+header .avatarMask {
+    clip-path: circle(48px at center);
+    -webkit-clip-path: circle(48px at center);
+}
