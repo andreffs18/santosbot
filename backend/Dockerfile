@@ -1,10 +1,11 @@
 FROM python:3.7
 
-# set environment variables
-ENV PORT=$PORT \
-  ENVIRONMENT=$ENVIRONMENT \
-  PROJECT_DIR=/app \
-  POETRY_VERSION=1.0.5 \
+ARG PORT
+ENV PORT $PORT
+ARG ENVIRONMENT
+ENV ENVIRONMENT $ENVIRONMENT
+
+ENV POETRY_VERSION=1.0.5 \
   # Prevent Python from writing *pyc files to disk
   PYTHONDONTWRITEBYTECODE=1 \
   # Dump Python tracebacks explicitly
@@ -18,7 +19,7 @@ ENV PORT=$PORT \
   # Timeout for downloading packages
   PIP_DEFAULT_TIMEOUT=100
 
-WORKDIR $PROJECT_DIR
+WORKDIR /app
 
 # Install poetry with specific version
 RUN pip install "poetry==$POETRY_VERSION"
@@ -27,8 +28,7 @@ COPY poetry.lock pyproject.toml ./
 # Project initialization without creating virtalenv
 RUN poetry config virtualenvs.create false && \
   poetry install $([ "$ENVIRONMENT" = 'production' ] && echo "--no-dev") --no-interaction --no-ansi
-
-# Creating folders, and files for a project:
+# Copying files and folder to root directory of the project:
 COPY api ./api
 
 EXPOSE $PORT

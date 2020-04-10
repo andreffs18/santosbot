@@ -5,10 +5,10 @@ from starlette.applications import Starlette
 from starlette.responses import JSONResponse
 from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
-
 from starlette.routing import Route
-from api.services import GetQuoteService
 
+from api.services import GetQuoteService
+from api.quotes import TRIGGER_WORDS
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -35,9 +35,23 @@ async def bot(request):
         return JSONResponse({"error": f"Unexpected error: {str(e)}"}, 500)
 
 
+async def words(request):
+    """From GET request, return dictionary of all trigger words and last time they were used.
+
+    Since Starlette still doesnt serialize datetime objects (https://github.com/encode/starlette/issues/787),
+    below we parse the datetime field to string."""
+    response = {}
+    for word, meta in TRIGGER_WORDS.items():
+        response.update({
+            word: str(meta.get("last_used_at"))
+        })
+    return JSONResponse(response, 200)
+
+
 routes = [
-    Route("/version", version), 
-    Route("/bot", bot)
+    Route("/version", version),
+    Route("/bot", bot),
+    Route("/words", words)
 ]
 middleware = [
     Middleware(CORSMiddleware, allow_origins=['*'])
