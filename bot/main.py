@@ -36,6 +36,9 @@ def setup_logger():
 def cache_slack_users():
 	"""Get list of users from slack and store key-value that keeps id->username"""
 	response = slack_client.api_call("users.list", token=SLACK_BOT_TOKEN)
+	if not response.get("ok"):
+		return
+
 	members = response.get('members')
 	return dict(map(lambda u: (u.get('id'), u.get('name')), members))
 
@@ -73,6 +76,9 @@ def parse_slack_output(users, slack_rtm_output):
 if __name__ == "__main__":
 	logger = setup_logger()
 	users = cache_slack_users()
+	if not users:
+		logger.error(f"Could not connect to Slack. Maybe SLACK_BOT_TOKEN was not properly configured.")
+		sys.exit(1)
 
 	# Get bot name UID
 	bot_id = get_bot_id(users)

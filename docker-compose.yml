@@ -3,38 +3,44 @@ version: "3"
 
 services:
   
-  api:
+  backend:
     build:
-      context: api/.
+      context: backend/.
+    # Overriding Dockerfile command so we can use the '--reload' flag of uvicorn while on development mode
     command: uvicorn api:app --port 8888 --host 0.0.0.0 --reload
     ports:
       - "8888:8888"
     volumes:
-      - ./api/:/app
+      - ./backend/:/app
     environment:
       ENVIRONMENT: development
       PORT: 8888
-      
+
   frontend:
     build:
       context: frontend/.
-    depends_on: 
-      - api
+    # Overriding Dockerfile command so we can have hot-reload
+    command: npm run serve
+    depends_on:
+      - backend
     volumes:
       - ./frontend:/app
       - /app/node_modules
     ports:
       - "8080:8080"
-    env_file: 
-      - frontend/.env
+    environment:
+      VUE_APP_API_URL: http://localhost:8888
 
   bot:
     build:
       context: bot/.
     restart: always
-    depends_on: 
-      - api
+    depends_on:
+      - backend
     volumes:
       - ./bot:/app
-    env_file:
-      - bot/.env
+    environment:
+      API_URL: http://backend:8888
+      SLACK_BOT_NAME: santosbot
+      SLACK_API_TOKEN: xoxp-...
+      READ_WEBSOCKET_DELAY: 1
