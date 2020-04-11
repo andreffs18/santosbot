@@ -29,7 +29,7 @@ COPY poetry.lock pyproject.toml ./
 RUN poetry config virtualenvs.create false && \
   poetry install $([ "$ENVIRONMENT" = 'production' ] && echo "--no-dev") --no-interaction --no-ansi
 # Copying files and folder to root directory of the project:
-COPY api ./api
+COPY api/ ./api
 
 EXPOSE $PORT
 CMD uvicorn api:app --port $PORT --host 0.0.0.0
