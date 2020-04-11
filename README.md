@@ -6,7 +6,7 @@
 </h1>
 
 <h4 align="center">
-    Slack Bot that spits out quotes from Gustavo Santos whenever a *Trigger Word* is written.
+    Slack Bot that spits out quotes from Gustavo Santos whenever a *<a href="https://santosbot.herokuapp.com/words/" target="_blank" >Trigger Word</a>* is written.
 </h4>
 
 <p align="center">  
@@ -36,21 +36,24 @@
 
 To run this locally you just need to have [docker](https://docs.docker.com/get-docker/) installed.  
 
+<p align="center"><img src="/terminalizer.gif?raw=true"/></p>
+
+Make sure you export your `SLACK_API_TOKEN`. More on that can be found on the [/bot](/bot/README.md) README file.
+
 ```shell script
-~ $ git clone git@github.com:andreffs18/santosbot.git
-~ %
-
-# Build and run project
-~/santosbot $ docker-compose up --build
+$ export SLACK_API_TOKEN=xoxb-*****
 ```
-
 
 ## Usage
 
-This project had divided into 3 parts:
+This project is divided into 3 parts:
 
-- [Backend API](/backend/README.md): Python ASGI web server that exposes an web API for getting Quoted.
+- [Backend API](/backend/README.md): Python ASGI web server that exposes an web API for getting quotes.
 - [Frontend App](/frontend/README.md): VueJS app that helps to showcase bot functionality.
 - [Slack Bot](/bot/README.md): Actual slack bot that you can run to interact with.
+
+By running with `$ docker-compose up` you instantiate all 3 services, which then can be accessed on a browser (`http://localhost:8080`).
+
+If you configured the `SLACK_API_TOKEN` then you should also be able to use the bot on your Slack team account.
 
 
