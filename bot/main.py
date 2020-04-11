@@ -3,7 +3,7 @@ import sys
 import time
 import logging
 import requests
-from datetime import datetime, timedelta
+from requests.exceptions import ConnectionError
 from slackclient import SlackClient
 
 # Backend API url
@@ -12,11 +12,7 @@ API_URL = os.environ.get("API_URL", "http://api:8888")
 SLACK_BOT_TOKEN = os.environ.get("SLACK_API_TOKEN")
 SLACK_BOT_NAME = os.environ.get("SLACK_BOT_NAME", "santosbot")
 # 1 second delay between reading from firehose
-READ_WEBSOCKET_DELAY = os.environ.get("READ_WEBSOCKET_DELAY", 1)
-# timeout (in seconds) before re-using the same quote
-QUOTE_REUSE_TIMEOUT = os.environ.get("QUOTE_REUSE_TIMEOUT", 15)
-# global variable to prevent double posting
-LAST_POST_AT = datetime.min
+READ_WEBSOCKET_DELAY = int(os.environ.get("READ_WEBSOCKET_DELAY", "1"))
 
 # python slack client
 slack_client = SlackClient(SLACK_BOT_TOKEN)
@@ -26,24 +22,19 @@ def setup_logger():
 	# create logger with 'spam_application'
 	logger = logging.getLogger("bot")
 	logger.setLevel(logging.DEBUG)
-	# create file handler which logs even debug messages
-	fh = logging.FileHandler('spam.log')
-	fh.setLevel(logging.DEBUG)
 	# create console handler with a higher log level
 	ch = logging.StreamHandler()
 	ch.setLevel(logging.DEBUG)
 	# create formatter and add it to the handlers
 	formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-	fh.setFormatter(formatter)
 	ch.setFormatter(formatter)
 	# add the handlers to the logger
-	logger.addHandler(fh)
 	logger.addHandler(ch)
 	return logger
 
 
 def cache_slack_users():
-	"""Get list of users from slack and store hash that keeps ID<>Username"""
+	"""Get list of users from slack and store key-value that keeps id->username"""
 	response = slack_client.api_call("users.list", token=SLACK_BOT_TOKEN)
 	members = response.get('members')
 	return dict(map(lambda u: (u.get('id'), u.get('name')), members))
@@ -67,8 +58,12 @@ def parse_slack_output(users, slack_rtm_output):
 			continue
 
 		logger.info(f'"{users.get(output.get("user"))}": "{output.get("text")}"')
-		response = requests.get(API_URL + "/bot?text=" + output.get('text', ""))
-		if not response.ok:
+		try:
+			response = requests.get(API_URL + "/bot?text=" + output.get('text', ""))
+			if not response.ok:
+				continue
+		except ConnectionError as e:
+			logger.error(f'⚠️  {str(e)}')
 			continue
 
 		quote = response.json()["quote"]

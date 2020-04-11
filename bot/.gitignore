@@ -140,7 +140,4 @@ cython_debug/
 
 # Custom
 *.DS_Store
-*.pyc
 *.ipynb_checkpoints/
-.dockerignore
-

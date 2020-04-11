@@ -2,50 +2,51 @@
 
 SlackBot that spits out quotes from Gustavo Santos whenever a **Trigger Word** is written.
 
-![](https://i.imgur.com/nM3mJd3.jpg)
-
+It runs entirely on the [SlackClient](https://github.com/slackapi/python-slackclient) for python by using the [**Real Time Messaging Api**](https://api.slack.com/rtm).
 
 ## Install 
 
-To install this you need:
+To run you must install [docker](https://docs.docker.com/get-docker/) and run the following:
 
-```shell
-$ git clone
-$ mkvirtualenv santosbot
-$ pip install -r requirements.txt
+```shell script
+# Build and run project
+~/santosbot/bot $ docker build -t bot:latest .
+~/santosbot/bot $ docker run --rm -it -v $(PWD):/app --env-file .env bot:latest 
 ```
 
-## Setup Bot
 
-This project runs entirely on the [SlackClient](https://github.com/slackapi/python-slackclient) for python by using the [**RTM Api**](https://api.slack.com/rtm).
-
-### Create Bot
-First of all you need to create a new Bot. For the sake of the joke, we will call it **"santosbot"**. You just need to go to "https://api.slack.com/bot-users" under "Custom bot users", and submit your bot name.
+## Usage
+First of all you need to create a new Bot on your slack team. For the sake of the joke, we will call it **"santosbot"**. 
+You just need to go to "https://api.slack.com/bot-users" under "Custom bot users", and submit your bot name.
 
 ![](https://i.imgur.com/TSYs9Tc.png)
 
 Once you have your new bot created, you need to save the **API Token** that is under **Integration Settings** section.
-> You can customize your bot with a picture, first name and last name. For this project, we will be calling it **Gugu Santos**
+> You can customize your bot with a picture, first name and last name. For this project, we will be calling it **Gustavo Santos**
 
-### Running "SantosBot" Server
 
-Now, that we already have our API token, we just need to run the project like so:
-```shell
-$ SLACK_BOT_TOKEN=xoxb-***** python run_bot.py
-Got BOT_ID=<@U6BR114N7> for "santosbot"
-"santosbot" connected and running!
-(datetime.datetime(2017, 8, 15, 18, 14, 10, 302603), [{u'type': u'hello'}])
-(datetime.datetime(2017, 8, 15, 18, 14, 11, 303554), [{u'url': u'**', u'type': u'reconnect_url'}])
+Now that we already have our API token, we just need to set the environment variable on a `.env` file. 
+```shell script
+~/santosbot/bot $ touch .env
+~/santosbot/bot $ echo "SLACK_API_TOKEN=xoxb-*****" >> .env```
+~/santosbot/bot $ docker run --rm -it -v $(PWD):/app --env-file .env bot:latest
+2020-04-10 16:01:52,999 - bot - INFO - Found BOT_ID=<@U6BR114N7>
+2020-04-10 16:01:53,860 - bot - INFO - "santosbot" connected and running!
+2020-04-10 16:02:03,893 - bot - INFO - "andreffs18": "Ola mundo"
+2020-04-10 16:02:06,730 - bot - INFO - "santosbot": "É o amor, ou a falta dele, que rege o mundo. Nada de bom acontece na sua ausência e todos os passos que possam ser dados sem o seu cunho serão passos em falso."
 (...)
 ```
 
-### Make it talk!
-To see it working, you just need to invite him to a slack channel and start talking. 
-Whever a **Trigger Word** is typed, he will select a random quote and post it as a reply to whatever you were saying.
 
-> You can find all Trigger Words on [/utils/quotes.py:123](https://github.com/andreffs18/santosbot/blob/master/utils/quotes.py#L188)
+### Environment Variables
 
+The only variable that we need to setup to make this bot work is the `SLACK_API_TOKEN`. The remaining have already default values. Below is the description of each:
 
-![](https://i.imgur.com/56XcpeI.png)
-
+| Variable | Description | Default value | 
+| ----- | ----- | ----- | 
+| `API_URL` | Url for requesting quotes on backend service. Default value is set to communicate with the docker container when we use `docker-compose up` | "http://api:8888" | 
+| `SLACK_BOT_NAME` | Bot name. This variable is configured when we setup the slack bot. | "santosbot" | 
+| `SLACK_API_TOKEN` | Slack token that allows us to crawl messages from a particular channel. | Not defined. | 
+| `READ_WEBSOCKET_DELAY` | Time spent, in seconds, waiting for the next message fetch. | "1" |
+  
 

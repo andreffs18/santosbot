@@ -1,12 +1,12 @@
 FROM python:3.7
 
-ENV PROJECT_DIR /app
-RUN mkdir -p $PROJECT_DIR
-WORKDIR $PROJECT_DIR
+WORKDIR /app
 
-COPY main.py requirements.txt ./
-
+# Copy only requirements to cache them in docker layer
+COPY requirements.txt ./
+# Install bot requirements
 RUN pip install --no-cache-dir -r requirements.txt
+# Copy actual bot script
+COPY main.py ./
 
-# RUN pipenv install --system --deploy
 CMD python main.py
