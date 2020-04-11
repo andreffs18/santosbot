@@ -27,15 +27,18 @@ This api exposes three endpoints:
 
 ### How does it work?
 
+All quotes were generated using the [jupyter notebook](https://jupyter.org/) on **"~/santosbot/backend/utils/Gustavo Santos Quote Extractor.ipynb"**, 
+which is simply extracting all quotes found on http://www.citador.pt/frases/citacoes/a/gustavo-santos/ and creating a dictionary that can be found on **"~/santosbot/backend/api/quotes.py"**
+
 Simply put the logic behind the `/bot` endpoint is the following:
 
-```mermaidjs
+```mermaid
 graph TD
-	A[GET /bot?text=Hello World] --> B
-	B[Get 'text' params from <br>request args and split<br> into 'tokens'] --> C
+    A[GET /bot?text=Hello World] --> B
+    B[Get 'text' params from <br>request args and split<br> into 'tokens'] --> C
     C{Intersect 'tokens' <br>with 'TRIGGER_WORDS'}
-	C --> |No intersection<br>found| D
-	C --> |Found intersection| E
+    C --> |No intersection<br>found| D
+    C --> |Found intersection| E
     D[Return empty quote]
     E[Get random 'TRIGGER_WORD'<br>from intersection] --> F
     F[Get random quote <br>associated with 'TRIGGER_WORD'] --> G
@@ -46,5 +49,7 @@ graph TD
     I[Return quote]
 ```
 
-> All quotes were generated using the [jupyter notebook](https://jupyter.org/) file on **"/backend/utils/Gustavo Santos Quote Extractor.ipynb"**, 
-which is simply extracting all quotes found on http://www.citador.pt/frases/citacoes/a/gustavo-santos/ and creating the dictionary found on **"/backend/api/quotes.py"**
+> Github doesn't support ["Mermaid JS"](https://mermaidjs.github.io/#/) [*yet*](https://github.community/t5/How-to-use-Git-and-GitHub/Feature-Request-Support-Mermaid-markdown-graph-diagrams-in-md/td-p/21967#), 
+> because of that we need to install ["Github + Mermaid"](https://chrome.google.com/webstore/detail/github-%20-mermaid/goiiopgdnkogdbjmncgedmgpoajilohe) chrome extension to be able to render this diagram. 
+
+
