@@ -42,5 +42,5 @@ services:
     environment:
       API_URL: http://backend:8888
       SLACK_BOT_NAME: santosbot
-      SLACK_API_TOKEN: xoxp-...
+      SLACK_API_TOKEN: $SLACK_API_TOKEN
       READ_WEBSOCKET_DELAY: 1

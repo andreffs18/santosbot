@@ -9,13 +9,13 @@ from slackclient import SlackClient
 # Backend API url
 API_URL = os.environ.get("API_URL", "http://api:8888")
 # Slack Bot Token: "https://api.slack.com/bot-users" under "Custom bot users"
-SLACK_BOT_TOKEN = os.environ.get("SLACK_API_TOKEN")
+SLACK_API_TOKEN = os.environ.get("SLACK_API_TOKEN")
 SLACK_BOT_NAME = os.environ.get("SLACK_BOT_NAME", "santosbot")
 # 1 second delay between reading from firehose
 READ_WEBSOCKET_DELAY = int(os.environ.get("READ_WEBSOCKET_DELAY", "1"))
 
 # python slack client
-slack_client = SlackClient(SLACK_BOT_TOKEN)
+slack_client = SlackClient(SLACK_API_TOKEN)
 
 
 def setup_logger():
@@ -35,7 +35,7 @@ def setup_logger():
 
 def cache_slack_users():
 	"""Get list of users from slack and store key-value that keeps id->username"""
-	response = slack_client.api_call("users.list", token=SLACK_BOT_TOKEN)
+	response = slack_client.api_call("users.list", token=SLACK_API_TOKEN)
 	if not response.get("ok"):
 		return
 
@@ -77,7 +77,7 @@ if __name__ == "__main__":
 	logger = setup_logger()
 	users = cache_slack_users()
 	if not users:
-		logger.error(f"Could not connect to Slack. Maybe SLACK_BOT_TOKEN was not properly configured.")
+		logger.error(f"Could not connect to Slack. Maybe SLACK_API_TOKEN was not properly configured.")
 		sys.exit(1)
 
 	# Get bot name UID
