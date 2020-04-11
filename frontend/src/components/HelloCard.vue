@@ -5,7 +5,7 @@
         <div class="avatar">
           <img
             class="avatarMask"
-            src="../../src/assets/images/avatar.jpg"
+            src="../assets/images/avatar.jpg"
             alt="Olha-me p&#39;este fofo!"
           />
         </div>
@@ -15,8 +15,8 @@
       <nav>
         <ul>
           <li v-bind:key="link" v-for="link in links">
-            <a :href="link.href" :aria-label="link.label">
-              <i :class="link.class"></i><br />
+            <a :href="link.href" :aria-label="link.label" target="_blank">
+              <i :class="link.class" /><br />
             </a>
           </li>
         </ul>
@@ -32,7 +32,7 @@ export default {
       links: [
         {
           label: "blog",
-          href: "http://blog.andreffs.com/2020-03-27-sa",
+          href: "http://blog.andreffs.com/#",
           class: "fa fa-book-open fa-lg"
         },
         {

@@ -3,7 +3,7 @@
     <div id="sidebar">
       <div id="team-picker">
         <ul class="teams">
-          <li class="team"></li>
+          <li class="team" />
         </ul>
       </div>
       <div id="team-name">
@@ -56,7 +56,7 @@
               :url="message.url"
               :text="message.text"
               :username="message.username"
-            ></SlackMessage>
+            />
           </li>
         </ul>
       </div>
@@ -89,12 +89,12 @@ export default {
       text: "",
       messages: [
         {
-          url: "https://camo.githubusercontent.com/fedd53410bcb4d9f9bb9a0a673cd2189efddf2ad/68747470733a2f2f692e696d6775722e636f6d2f6e4d336d4a64332e6a7067",
+          url: require("../assets/images/santosbot.jpeg"),
           username: "Gustavo Santos",
           text: "@channel A liberdade é o expoente máximo do amor-próprio."
         },
         {
-          url: "https://camo.githubusercontent.com/fedd53410bcb4d9f9bb9a0a673cd2189efddf2ad/68747470733a2f2f692e696d6775722e636f6d2f6e4d336d4a64332e6a7067",
+          url: require("../assets/images/santosbot.jpeg"),
           username: "Gustavo Santos",
           text: "Para ser como os outros prefiro assumir que não sou ninguém."
         }
@@ -102,19 +102,23 @@ export default {
     };
   },
   updated() {
-    var container = this.$el.querySelector("#chatbox");
+    const container = this.$el.querySelector("#chatbox");
     container.scrollTop = container.scrollHeight;
   },
   mounted() {
-    window.addEventListener("keypress", function() {
+    window.addEventListener(
+      "keypress",
+      function() {
         if (this.isActive) {
           return;
         }
         this.isActive = true;
 
-        var status = this.$el.querySelector("li.direct-message.andreffs18 div");
+        const status = this.$el.querySelector(
+          "li.direct-message.andreffs18 div"
+        );
         status.classList = ["status"];
-        
+
         setTimeout(() => {
           this.isActive = false;
           status.classList = ["status inactive"];
@@ -131,7 +135,7 @@ export default {
 
       this.messages.push({
         username: "andreffs",
-        url: "https://avatars2.githubusercontent.com/u/5011530",
+        url: require("../assets/images/andreffs.jpeg"),
         text: this.text.trim()
       });
       this.postMessage();
@@ -144,15 +148,14 @@ export default {
         .get(process.env.VUE_APP_API_URL + "/bot?text=" + this.text)
         .then(response => {
           console.log(response);
-          if(response.data.quote === ""){
+          if (response.data.quote === "") {
             return;
           }
           this.messages.push({
             username: "Gustavo Santos",
-            url: "https://camo.githubusercontent.com/fedd53410bcb4d9f9bb9a0a673cd2189efddf2ad/68747470733a2f2f692e696d6775722e636f6d2f6e4d336d4a64332e6a7067",
+            url: require("../assets/images/santosbot.jpeg"),
             text: response.data.quote
           });
-          this.scrollToBottom();
         });
     }
   }

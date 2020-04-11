@@ -1,6 +1,6 @@
 <template>
   <li class="message">
-    <div class="user-icon"><img :src="url" /></div>
+    <div class="user-icon"><img :src="url" alt="icon" /></div>
     <div class="body">
       <div class="username">{{ username }}</div>
       <div class="text">{{ text }}</div>

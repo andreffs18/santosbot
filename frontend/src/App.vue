@@ -6,8 +6,8 @@
       integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
       crossorigin="anonymous"
     />
-    <HelloCard></HelloCard>
-    <Slack></Slack>
+    <HelloCard />
+    <Slack />
     <div style="clear:both;"></div>
   </div>
 </template>
