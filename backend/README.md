@@ -16,7 +16,7 @@ To just run the backend api you must install [docker](https://docs.docker.com/ge
 
 ## Usage
 
-This api simple exposes three endpoints:
+This api exposes three endpoints:
 
 | Endpoint | Description |
 | ----- | ----- | 
@@ -46,5 +46,5 @@ graph TD
     I[Return quote]
 ```
 
-All quotes were generated using the [jupyter notebook](https://jupyter.org/) file on "/api/utils/Gustavo Santos Quote Extractor.ipynb", 
-which is simply extracting all quotes found on http://www.citador.pt/frases/citacoes/a/gustavo-santos/1 and creating the dictionary found on "/api/api/quotes.py"
+> All quotes were generated using the [jupyter notebook](https://jupyter.org/) file on **"/backend/utils/Gustavo Santos Quote Extractor.ipynb"**, 
+which is simply extracting all quotes found on http://www.citador.pt/frases/citacoes/a/gustavo-santos/ and creating the dictionary found on **"/backend/api/quotes.py"**

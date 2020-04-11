@@ -38,6 +38,9 @@ Now that we already have our API token, we just need to set the environment vari
 ```
 
 
+![](https://i.imgur.com/56XcpeI.png)
+
+
 ### Environment Variables
 
 The only variable that we need to setup to make this bot work is the `SLACK_API_TOKEN`. The remaining have already default values. Below is the description of each:
