@@ -64,6 +64,7 @@ def parse_slack_output(users, slack_rtm_output):
 		try:
 			response = requests.get(API_URL + "/bot?text=" + output.get('text', ""))
 			if not response.ok:
+				logger.warning(f'⚠️ Failed to request quote: {response.text}')
 				continue
 		except ConnectionError as e:
 			logger.error(f'⚠️  {str(e)}')
@@ -77,22 +78,22 @@ if __name__ == "__main__":
 	logger = setup_logger()
 	users = cache_slack_users()
 	if not users:
-		logger.error(f"Could not connect to Slack. Maybe SLACK_API_TOKEN was not properly configured.")
+		logger.error(f"❌ Could not connect to Slack. Maybe SLACK_API_TOKEN was not properly configured.")
 		sys.exit(1)
 
 	# Get bot name UID
 	bot_id = get_bot_id(users)
 	if not bot_id:
-		logger.error(f"No bot found! Closing!")
+		logger.error(f"❌ No bot found! Closing!")
 		sys.exit(1)
-	logger.info(f"Found BOT_ID={bot_id}")
+	logger.info(f"🤖 Found BOT_ID={bot_id}")
 
 	# Try to start connection, exit if fails
 	if not slack_client.rtm_connect():
-		logger.info("Connection failed. Invalid Slack token or bot ID?")
+		logger.info("❌ Connection failed. Invalid Slack token or bot ID?")
 		sys.exit(1)
 
-	logger.info("\"{}\" connected and running!".format(SLACK_BOT_NAME))
+	logger.info(f'✅ "{SLACK_BOT_NAME}" connected and running!')
 	while True:
 		parse_slack_output(users, slack_client.rtm_read())
 		time.sleep(READ_WEBSOCKET_DELAY)

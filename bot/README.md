@@ -11,7 +11,7 @@ To run you must install [docker](https://docs.docker.com/get-docker/) and run th
 ```shell script
 # Build and run project
 ~/santosbot/bot $ docker build -t bot:latest .
-~/santosbot/bot $ docker run --rm -it -v $(PWD):/app --env-file .env bot:latest 
+~/santosbot/bot $ docker run --rm -it -v $(PWD):/app -e SLACK_API_TOKEN=$SLACK_API_TOKEN bot:latest 
 ```
 
 
@@ -25,11 +25,10 @@ Once you have your new bot created, you need to save the **API Token** that is u
 > You can customize your bot with a picture, first name and last name. For this project, we will be calling it **Gustavo Santos**
 
 
-Now that we already have our API token, we just need to set the environment variable on a `.env` file. 
+Now that we already have our API token, we just need to set the environment variable: 
 ```shell script
-~/santosbot/bot $ touch .env
-~/santosbot/bot $ echo "SLACK_API_TOKEN=xoxb-*****" >> .env```
-~/santosbot/bot $ docker run --rm -it -v $(PWD):/app --env-file .env bot:latest
+~/santosbot/bot $ export SLACK_API_TOKEN=xoxb-*****
+~/santosbot/bot $ docker run --rm -it -v $(PWD):/app -e SLACK_API_TOKEN=$SLACK_API_TOKEN bot:latest
 2020-04-10 16:01:52,999 - bot - INFO - Found BOT_ID=<@U6BR114N7>
 2020-04-10 16:01:53,860 - bot - INFO - "santosbot" connected and running!
 2020-04-10 16:02:03,893 - bot - INFO - "andreffs18": "Ola mundo"
@@ -52,4 +51,18 @@ The only variable that we need to setup to make this bot work is the `SLACK_API_
 | `SLACK_API_TOKEN` | Slack token that allows us to crawl messages from a particular channel. | Not defined. | 
 | `READ_WEBSOCKET_DELAY` | Time spent, in seconds, waiting for the next message fetch. | "1" |
   
+So, instead of defining every variable on the `$ docker run` command, we can do something like:
 
+```shell script
+~/santosbot/bot $ cat <<EOT >> .env
+API_URL=http://localhost:8888
+SLACK_BOT_NAME=santosbot
+SLACK_API_TOKEN=$SLACK_API_TOKEN
+READ_WEBSOCKET_DELAY=0
+EOT
+~/santosbot/bot $ docker run --rm -it -v $(PWD):/app --env-file .env bot:latest
+2020-04-10 16:01:52,999 - bot - INFO - Found BOT_ID=<@U6BR114N7>
+2020-04-10 16:01:53,860 - bot - INFO - "santosbot" connected and running!
+2020-04-10 16:02:03,893 - bot - INFO - "andreffs18": "Ola mundo"
+(...)
+```
