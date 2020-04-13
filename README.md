@@ -6,7 +6,7 @@
 </h1>
 
 <h4 align="center">
-    Slack Bot that spits out quotes from Gustavo Santos whenever a *<a href="https://santosbot.herokuapp.com/words/" target="_blank" >Trigger Word</a>* is written.
+    Slack Bot that spits out quotes from Gustavo Santos whenever a *<a href="https://santosbot.herokuapp.com/api/words" target="_blank" >Trigger Word</a>* is written.
 </h4>
 
 <p align="center">  
@@ -21,7 +21,8 @@
 <div align="center">
   <h4>
     <a href="#installation">Installation</a> |
-    <a href="#usage">Usage</a>
+    <a href="#usage">Usage</a> | 
+    <a href="#deployment">Deployment</a>
   </h4>
 </div>
 
@@ -56,4 +57,16 @@ By running with `$ docker-compose up` you instantiate all 3 services, which then
 
 If you configured the `SLACK_API_TOKEN` then you should also be able to use the bot on your Slack team account.
 
+## Deployment
 
+This project is hosted on heroku, **on just one dyno!**. Yup, 3 apps, different languages, one dyno. You can check it on [https://santosbot.herokuapp.com](https://santosbot.herokuapp.com).
+
+The structure is pretty simple:
+- There is an nginx app, working as reverse proxy, that redirects all requests to the frontend app;
+- All "/api" request are proxied to the backend server;
+- The actual bot is just running on a different process, and connects to my slack account using slack RTM library (yup, I have this live, working, just for the sake of it)
+- Every process was started by honcho (foreman port to python) to bypass the number of dynos restriction on heroku.
+
+There is actually a [blogpost](#) explaining how I achieved that, so you might just check that out 😄.
+
+> If your curious commit [462b27a](https://github.com/andreffs18/santosbot/commit/462b27a) added all necessary files to make the app public, via heroku.

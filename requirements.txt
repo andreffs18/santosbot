@@ -1,2 +1,2 @@
-# ahah, fooled you heroku 🙃
+# ahah, tricked you heroku 🙃
 honcho
