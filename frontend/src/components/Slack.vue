@@ -86,7 +86,7 @@ export default {
   data() {
     return {
       isActive: false,
-      text: "",
+      text: "Olá mundo!",
       messages: [
         {
           url: require("../assets/images/santosbot.jpeg"),
