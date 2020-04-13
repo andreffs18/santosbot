@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+heroku buildpacks:clear
+heroku buildpacks:add --index 1 https://github.com/heroku/heroku-buildpack-nginx.git
+heroku buildpacks:add --index 2 heroku/python
+heroku buildpacks:add --index 3 https://github.com/heroku/heroku-buildpack-nodejs#v170
+# Just print buildpacks configuration
+heroku buildpacks

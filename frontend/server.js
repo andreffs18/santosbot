@@ -1,6 +1,8 @@
+const path = require("path");
+const fs = require("fs");
+
 const express = require("express");
 const serveStatic = require("serve-static");
-const path = require("path");
 
 const app = express();
 
@@ -12,6 +14,11 @@ app.get(/.*/, function(req, res) {
   res.sendFile(path.join(__dirname, "/dist/index.html"));
 });
 
-const port = process.env.PORT || 8080;
-app.listen(port);
+const port = 8080;
+app.listen(port, () => {
+  if (process.env.DYNO) {
+    console.log("Running on Heroku!");
+    fs.openSync("/tmp/app-initialized", "w");
+  }
+});
 console.log(`Server is listening on port: ${port}`);
