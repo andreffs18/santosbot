@@ -8,11 +8,13 @@ COPY package*.json ./
 RUN npm install
 # copy project files and folders to the current working directory
 COPY src/ ./src
+COPY public/ ./public
 COPY server.js vue.config.js babel.config.js ./
 
 # Setup environments
 ARG VUE_APP_API_URL
 ENV VUE_APP_API_URL $VUE_APP_API_URL
+
 # build app for production with minification
 RUN npm run build
 
