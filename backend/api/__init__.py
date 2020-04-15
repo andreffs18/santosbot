@@ -57,7 +57,7 @@ middleware = [
     Middleware(CORSMiddleware, allow_origins=['*'])
 ]
 
-environment = os.environ.get("ENVIRONMENT", True)
+environment = os.environ.get("ENVIRONMENT", "development")
 debug = os.environ.get("DEBUG", True)
 logger.info(f'🌀 Starting app in "{environment}" (DEBUG={debug})')
 app = Starlette(debug=debug, routes=routes, middleware=middleware)
