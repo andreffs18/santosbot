@@ -4,6 +4,8 @@ SlackBot that spits out quotes from Gustavo Santos whenever a **Trigger Word** i
 
 It runs entirely on the [SlackClient](https://github.com/slackapi/python-slackclient) for python by using the [**Real Time Messaging Api**](https://api.slack.com/rtm).
 
+![](/bot/terminalizer.gif)
+
 ## Install 
 
 To run you must install [docker](https://docs.docker.com/get-docker/) and run the following:

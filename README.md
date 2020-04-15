@@ -55,11 +55,13 @@ This project is divided into 3 parts:
 
 By running with `$ docker-compose up` you instantiate all 3 services, which then can be accessed on a browser (`http://localhost:8080`).
 
-If you configured the `SLACK_API_TOKEN` then you should also be able to use the bot on your Slack team account.
+If you configured the `SLACK_API_TOKEN` then you should also be able to use the bot on your Slack team account, out of the box! 📦
+
+> Instructions on how to run each service separately can be found in each service folder.
 
 ## Deployment
 
-This project is hosted on heroku, **on just one dyno!**. Yup, 3 apps, different languages, one dyno. You can check it on [https://santosbot.herokuapp.com](https://santosbot.herokuapp.com).
+This project is hosted on [Heroku](https://www.heroku.com/), **on just one dyno!**. Yup, 3 apps, different languages, one dyno. You can check it on [https://santosbot.herokuapp.com](https://santosbot.herokuapp.com).
 
 The structure is pretty simple:
 - There is an nginx app, working as reverse proxy, that redirects all requests to the frontend app;

@@ -4,13 +4,15 @@ Very simple HTTP web server build on Python 3.7, using [Starlette](https://www.s
 
 Its main job is to expose an endpoint to return Gustavo Santos quotes 😂.
 
+![](/backend/terminalizer.gif)
+
 ## Install 
 
 To just run the backend api you must install [docker](https://docs.docker.com/get-docker/) and run the following:
 
 ```shell script
-# Build and run project, on port 8888
-~/santosbot/backend $ docker build --build-arg PORT=8888 --build-arg ENVIRONMENT=development -t backend:latest .
+# Build and run project
+~/santosbot/backend $ docker build -t backend:latest .
 ~/santosbot/backend $ docker run --rm -it -v $(PWD):/app -p 8888:8888 backend:latest 
 ```
 

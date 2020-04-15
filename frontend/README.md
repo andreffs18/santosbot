@@ -2,6 +2,8 @@
 
 VueJS app that serves a "slack-alike" interface to showcase "Gustavo Santos" bot functionality.
 
+![](/frontend/terminalizer.gif)
+
 ## Install 
 
 This project has a `Dockerfile` which allows you to run this with [docker](https://docs.docker.com/get-docker/):
