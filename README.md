@@ -69,6 +69,6 @@ The structure is pretty simple:
 - The actual bot is just running on a different process, and connects to my slack account using slack RTM library (yup, I have this live, working, just for the sake of it)
 - Every process was started by honcho (foreman port to python) to bypass the number of dynos restriction on heroku.
 
-There is actually a [blogpost](#) explaining how I achieved that, so you might just check that out 😄.
+There is actually a [blogpost](https://www.andreffs.com/blog/host-slack-bot-in-heroku-for-free/) explaining how I achieved that, so you might just check that out 😄.
 
 > If your curious commit [462b27a](https://github.com/andreffs18/santosbot/commit/462b27a) added all necessary files to make the app public, via heroku.

@@ -32,7 +32,7 @@ export default {
       links: [
         {
           label: "blog",
-          href: "http://blog.andreffs.com/#",
+          href: "https://www.andreffs.com/blog/host-slack-bot-in-heroku-for-free/",
           class: "fa fa-book-open fa-lg"
         },
         {
